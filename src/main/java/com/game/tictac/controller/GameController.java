@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class GameController {
 
     private final GameService gameService;
-    private final SimpMessagingTemplate simpMessagingTemplate;
 
 
     @PostMapping("/start")
@@ -43,7 +42,6 @@ public class GameController {
     public ResponseEntity<Game> gamePlay(@RequestBody GamePlay request) throws NotFoundException, InvalidGameException {
 
         Game game = gameService.gamePlay(request);
-        simpMessagingTemplate.convertAndSend("/topic/game-progress/" + game.getGameId(), game);
         return ResponseEntity.ok(game);
     }
 }
