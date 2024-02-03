@@ -10,7 +10,6 @@ import com.game.tictac.model.GamePlay;
 import com.game.tictac.service.GameService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,14 +24,14 @@ public class GameController {
 
 
     @PostMapping("/start")
-    public ResponseEntity<Game> start(@RequestBody GameRequest request) {
+    public ResponseEntity<Game> createNewGame(@RequestBody GameRequest request) {
 
         return ResponseEntity.ok(gameService.createNewGame(request));
     }
 
 
     @PostMapping("/connect")
-    public ResponseEntity<Game> connect(@RequestBody ConnectRequest request) throws InvalidGameException, NotFoundException {
+    public ResponseEntity<Game> connectToGame(@RequestBody ConnectRequest request) throws InvalidGameException, NotFoundException {
 
         return ResponseEntity.ok(gameService.connectToGame(request.getPlayer(), request.getGameId()));
     }
